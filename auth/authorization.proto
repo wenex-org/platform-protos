@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package authorization;
+
+service AuthorizationService {
+  rpc Can(AuthorizeRequest) returns (AuthorizeResponse);
+}
+
+message Void { string result = 1; }
+
+message AuthorizeRequest {
+  optional string action = 1;
+  optional string object = 2;
+  optional Token token = 3;
+}
+
+message Token {
+  optional string t = 1;
+  optional string ip = 2;
+  optional string cid = 3;
+  optional string aid = 4;
+  optional string uid = 5;
+  optional string role = 6;
+  repeated string scope = 7;
+  optional string domain = 8;
+  optional string session = 9;
+  optional string client_id = 10;
+}
+
+message AuthorizeResponse {
+  bool granted = 1;
+  repeated Grant grants = 2;
+}
+
+message Grant {
+  string subject = 1;
+  string action = 2;
+  string object = 3;
+
+  repeated string field = 4;
+  repeated string filter = 5;
+  repeated string location = 6;
+
+  repeated GrantTime time = 7;
+}
+
+message GrantTime {
+  int64 duration = 1;
+  string cron_exp = 2;
+}

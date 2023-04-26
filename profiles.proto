@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package profiles;
+
+service CoreService {
+  rpc Count(Filter) returns (Total);
+  rpc Create(Profile) returns (Profile);
+
+  rpc FindOne(Filter) returns (Profile);
+  rpc FindMany(Filter) returns (Profiles);
+
+  rpc FindById(Filter) returns (Profile);
+
+  rpc DeleteById(Filter) returns (Profile);
+  rpc RestoreById(Filter) returns (Profile);
+  rpc DestroyById(Filter) returns (Profile);
+
+  rpc UpdateById(UpdateProfile) returns (Profile);
+  rpc UpdateBulk(UpdateProfile) returns (Total);
+}
+
+message Total { int64 count = 1; }
+
+message Filter {
+  optional string query = 1;
+  optional string projection = 2;
+  optional string pagination = 3;
+}
+
+message Profile {
+  // Base Schema
+  optional string id = 1;
+
+  string owner = 2;
+  repeated string shares = 3;
+  repeated string zones = 4;
+  repeated string clients = 5;
+
+  optional string created_at = 6;
+  optional string created_by = 7;
+  optional string created_in = 8;
+  optional string updated_at = 9;
+  optional string updated_by = 10;
+  optional string updated_in = 11;
+  optional string deleted_at = 12;
+  optional string deleted_by = 13;
+  optional string deleted_in = 14;
+  optional string restored_at = 15;
+  optional string restored_by = 16;
+  optional string restored_in = 17;
+
+  optional string version = 18;
+  repeated string tags = 19;
+
+  // Profile Specific Schema
+  string type = 50;
+
+  optional string gender = 51;
+  optional string last_name = 52;
+  optional string first_name = 53;
+
+  optional Place birth_place = 54;
+  optional string birth_date = 55;
+
+  optional string avatar = 56;
+  optional string nationality = 57;
+  optional string national_code = 58;
+  optional string additional_name = 59;
+}
+
+message Place {
+  string country = 1;
+
+  optional string name = 2;
+  optional string region = 3;
+  optional string locality = 4;
+}
+
+message Profiles { repeated Profile items = 1; }
+
+message UpdateProfile {
+  Profile update = 1;
+  Filter filter = 2;
+}

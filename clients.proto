@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package clients;
+
+service CoreService {
+  rpc Count(Filter) returns (Total);
+  rpc Create(Client) returns (Client);
+
+  rpc FindOne(Filter) returns (Client);
+  rpc FindMany(Filter) returns (Clients);
+
+  rpc FindById(Filter) returns (Client);
+
+  rpc DeleteById(Filter) returns (Client);
+  rpc RestoreById(Filter) returns (Client);
+  rpc DestroyById(Filter) returns (Client);
+
+  rpc UpdateById(UpdateClient) returns (Client);
+  rpc UpdateBulk(UpdateClient) returns (Total);
+}
+
+message Total { int64 count = 1; }
+
+message Filter {
+  optional string query = 1;
+  optional string projection = 2;
+  optional string pagination = 3;
+}
+
+message Client {
+  // Base Schema
+  optional string id = 1;
+
+  string owner = 2;
+  repeated string shares = 3;
+  repeated string zones = 4;
+  repeated string clients = 5;
+
+  optional string created_at = 6;
+  optional string created_by = 7;
+  optional string created_in = 8;
+  optional string updated_at = 9;
+  optional string updated_by = 10;
+  optional string updated_in = 11;
+  optional string deleted_at = 12;
+  optional string deleted_by = 13;
+  optional string deleted_in = 14;
+  optional string restored_at = 15;
+  optional string restored_by = 16;
+  optional string restored_in = 17;
+
+  optional string version = 18;
+  repeated string tags = 19;
+
+  // Client Specific Schema
+  string name = 50;
+  string plan = 51;
+
+  optional string logo = 52;
+  optional string site = 53;
+  optional string slogan = 54;
+
+  string client_id = 55;
+  string client_secret = 56;
+  string expiration_date = 57;
+
+  repeated string scopes = 58;
+  repeated Domain domains = 59;
+
+  repeated string grant_types = 60;
+  optional string description = 61;
+
+  repeated OtpService otp_services = 62;
+}
+
+message Domain {
+  string id = 1;
+  string name = 2;
+  repeated string zones = 3;
+}
+
+message OtpService {
+  optional string type = 1;
+  optional string provider = 2;
+  optional OtpConfig config = 3;
+}
+
+message OtpConfig {
+  optional string apikey = 1;
+  optional string host = 2;
+}
+
+message Clients { repeated Client items = 1; }
+
+message UpdateClient {
+  Client update = 1;
+  Filter filter = 2;
+}
