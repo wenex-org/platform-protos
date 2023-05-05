@@ -1,17 +1,19 @@
 syntax = "proto3";
-
 package authorization;
 
-service AuthorizationService {
-  rpc Can(AuthorizeRequest) returns (AuthorizeResponse);
+service AuthorizationService { rpc Can(AuthRequest) returns (AuthResponse); }
+
+message AuthRequest {
+  string token = 1;
+
+  optional string action = 2;
+  optional string object = 3;
+  optional string subject = 4;
 }
 
-message Void { string result = 1; }
-
-message AuthorizeRequest {
-  optional string action = 1;
-  optional string object = 2;
-  optional Token token = 3;
+message AuthResponse {
+  optional bool granted = 1;
+  repeated Grant grants = 2;
 }
 
 message Token {
@@ -27,24 +29,19 @@ message Token {
   optional string client_id = 10;
 }
 
-message AuthorizeResponse {
-  bool granted = 1;
-  repeated Grant grants = 2;
-}
-
 message Grant {
-  string subject = 1;
-  string action = 2;
-  string object = 3;
+  string subject = 50;
+  string action = 51;
+  string object = 52;
 
-  repeated string field = 4;
-  repeated string filter = 5;
-  repeated string location = 6;
+  repeated string field = 53;
+  repeated string filter = 54;
+  repeated string location = 55;
 
-  repeated GrantTime time = 7;
-}
+  repeated Time times = 56;
 
-message GrantTime {
-  int64 duration = 1;
-  string cron_exp = 2;
+  message Time {
+    int64 duration = 50;
+    string cron_exp = 51;
+  }
 }
