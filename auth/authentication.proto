@@ -28,28 +28,43 @@ message AuthToken {
 
 message AuthRequest {
   string grant_type = 1;
+  optional string response_type = 2;
 
-  optional string app_id = 2;
-  optional string domain = 3;
+  optional string app_id = 3;
   optional string client_id = 4;
   optional string client_secret = 5;
-  optional string phone = 6;
-  optional string email = 7;
-  optional string username = 8;
-  optional string password = 9;
-  optional string confirmation_code = 10;
-  optional string refresh_token = 11;
-  repeated string scope = 12;
-  optional string code = 13;
-  repeated string roles = 14;
+
+  optional string code = 6;
+  optional string state = 7;
+
+  optional string scope = 8;
+
+  repeated string roles = 9;
+  optional string domain = 10;
+
+  optional string phone = 11;
+
+  optional string email = 12;
+
+  optional string username = 13;
+  optional string password = 14;
+
+  optional string refresh_token = 15;
+  optional string confirmation_code = 16;
 }
 
 message AuthResponse {
-  optional string access_token = 1;
-  optional string refresh_token = 2;
-  optional string token_type = 3;
-  optional string code = 4;
-  optional string expires_in = 5;
-  optional string session = 6;
-  repeated string scope = 7;
+  optional string token_type = 1;
+
+  optional string session = 2;
+
+  optional string expires_in = 3;
+
+  optional string access_token = 4;
+  optional string refresh_token = 5;
+
+  optional string code = 6;
+  optional string state = 7;
+
+  optional string scope = 8;
 }
