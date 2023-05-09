@@ -5,14 +5,14 @@ service AuthenticationService {
   rpc Token(AuthRequest) returns (AuthResponse) {};
 
   rpc Logout(TokenValue) returns (Result) {};
-  rpc Decrypt(TokenValue) returns (AuthToken) {};
+  rpc Decrypt(TokenValue) returns (JwtToken) {};
 }
 
 message Result { string result = 1; }
 
 message TokenValue { string token = 1; }
 
-message AuthToken {
+message JwtToken {
   string cid = 1;
   string type = 2;
   string domain = 3;
@@ -37,7 +37,7 @@ message AuthRequest {
   optional string code = 6;
   optional string state = 7;
 
-  optional string scope = 8;
+  repeated string scopes = 8;
 
   repeated string roles = 9;
   optional string domain = 10;
@@ -58,7 +58,7 @@ message AuthResponse {
 
   optional string session = 2;
 
-  optional string expires_in = 3;
+  optional int64 expires_in = 3;
 
   optional string access_token = 4;
   optional string refresh_token = 5;
@@ -66,5 +66,5 @@ message AuthResponse {
   optional string code = 6;
   optional string state = 7;
 
-  optional string scope = 8;
+  repeated string scopes = 8;
 }
