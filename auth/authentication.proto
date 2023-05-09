@@ -4,11 +4,11 @@ package authentication;
 service AuthenticationService {
   rpc Token(AuthRequest) returns (AuthResponse) {};
 
-  rpc Logout(TokenValue) returns (Void) {};
+  rpc Logout(TokenValue) returns (Result) {};
   rpc Decrypt(TokenValue) returns (AuthToken) {};
 }
 
-message Void { string result = 1; }
+message Result { string result = 1; }
 
 message TokenValue { string token = 1; }
 
