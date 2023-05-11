@@ -68,5 +68,7 @@ message AuthResponse {
   optional string code = 6;
   optional string state = 7;
 
-  repeated string scopes = 8;
+  optional string role = 8;
+  optional string scope = 9;
+  optional string domain = 10;
 }
