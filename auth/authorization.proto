@@ -10,14 +10,15 @@ message AuthRequest {
   string object = 3;
 
   optional string ip = 4;
+  optional bool strict = 5;
 }
 
 message AuthResponse {
   bool granted = 1;
-  repeated Grant grants = 2;
+  repeated Ability abilities = 2;
 }
 
-message Grant {
+message Ability {
   string subject = 50;
   string action = 51;
   string object = 52;
@@ -26,7 +27,7 @@ message Grant {
   repeated string filter = 54;
   repeated string location = 55;
 
-  repeated Time times = 56;
+  repeated Time time = 56;
 
   message Time {
     int64 duration = 50;
