@@ -6,12 +6,14 @@ service AuthorizationService { rpc Can(AuthRequest) returns (AuthResponse); }
 message AuthRequest {
   string token = 1;
 
-  optional string action = 2;
-  optional string object = 3;
+  string action = 2;
+  string object = 3;
+
+  optional string ip = 4;
 }
 
 message AuthResponse {
-  optional bool granted = 1;
+  bool granted = 1;
   repeated Grant grants = 2;
 }
 
