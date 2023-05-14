@@ -30,7 +30,7 @@ message Ability {
   repeated Time time = 56;
 
   message Time {
-    int64 duration = 50;
+    int32 duration = 50;
     string cron_exp = 51;
   }
 }

@@ -60,7 +60,7 @@ message AuthResponse {
 
   optional string session = 2;
 
-  optional int64 expires_in = 3;
+  optional int32 expires_in = 3;
 
   optional string access_token = 4;
   optional string refresh_token = 5;
