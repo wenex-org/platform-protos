@@ -22,8 +22,8 @@ message JwtToken {
   repeated string roles = 6;
   repeated string scopes = 7;
 
-  optional string app_id = 8;
-  optional string user_id = 9;
+  optional string aid = 8;
+  optional string uid = 9;
 }
 
 message AuthRequest {
