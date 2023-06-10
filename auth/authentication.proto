@@ -33,7 +33,7 @@ message AuthRequest {
   repeated string roles = 3;
   repeated string scopes = 4;
   optional string domain = 5;
-  
+
   optional string email = 6;
   optional string username = 7;
   optional string password = 8;
