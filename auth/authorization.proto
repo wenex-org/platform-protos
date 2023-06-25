@@ -16,9 +16,9 @@ message AuthRequest {
 
 message AuthResponse {
   bool granted = 1;
-  repeated Ability abilities = 2;
+  repeated Policy policies = 2;
 
-  message Ability {
+  message Policy {
     string subject = 50;
     string action = 51;
     string object = 52;
